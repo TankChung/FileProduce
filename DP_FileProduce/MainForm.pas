@@ -209,6 +209,9 @@ begin
       if ComboBox1.Text=FormatDateTime('hh',now) then
       begin
         WriteTxT('','Start Auto Output Files on Every Day..');
+        // 因陣列只有0~7,所以滿了要歸0
+        if iDataCount=8 then
+          iDataCount:=0;
         WriteTxT(LabeledEdit1.Text+'\'+FormatDateTime('yyyymmdd_hh_',now)+'AutoFile.txt',sData[iDataCount]);
         if FileExists(LabeledEdit1.Text+'\'+FormatDateTime('yyyymmdd_hh_',now)+'AutoFile.txt') then
           WriteTxT('','Auto Output Files on Every Day is Success !!')
@@ -224,6 +227,8 @@ begin
     if sRecordHour<>FormatDateTime('hh',now) then
     begin
       WriteTxT('','Start Auto Output Files on Every Hour..');
+      if iDataCount=8 then
+        iDataCount:=0;
       WriteTxT(LabeledEdit1.Text+'\'+FormatDateTime('yyyymmdd_hh_',now)+'AutoFile.txt',sData[iDataCount]);
       if FileExists(LabeledEdit1.Text+'\'+FormatDateTime('yyyymmdd_hh_',now)+'AutoFile.txt') then
         WriteTxT('','Auto Output Files on Every Hour is Success !!')
